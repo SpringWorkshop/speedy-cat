@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  registry-service-master:
+    container_name: registry-service-master
+    build:
+      context: ../../registry-service
+      dockerfile: ./buildtask/Dockerfile
+    working_dir: /app
+    environment:
+      APP_ENV: dev
+      HOSTNAME: registry-service-master
+      REPLICATE: registry-service-replicate
+    expose:
+      - 8760
+    ports:
+      - 8760:8760
+
+  registry-service-replicate:
+      container_name: registry-service-replicate
+      build:
+        context: ../
+        dockerfile: ./buildtask/Dockerfile
+      working_dir: /app
+      environment:
+        APP_ENV: dev
+        HOSTNAME: registry-service-replicate
+        REPLICATE: registry-service-master
+      expose:
+        - 8760
+      ports:
+        - 8761:8760

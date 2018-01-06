@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  service-monitor:
+    container_name: service-monitor
+    build:
+      context: ../../service-monitor
+      dockerfile: ./buildtask/Dockerfile
+    working_dir: /app
+    external_links:
+      - registry-service-master
+      - registry-service-replicate
+    environment:
+      APP_ENV: dev
+      REGISTRY_CLUSTERS: http://registry-service-master:8760/eureka/,http://registry-service-replicate:8760/eureka/
+      SMTP_SERVER: smtp.163.com
+      PAGER_EMAIL: rivneg@163.com
+    expose:
+      - 8771
+    ports:
+      - 8771:8771
