@@ -65,5 +65,6 @@
 	<modules>
 		<module>registry-service</module>
 		<module>service-monitor</module>
+		<module>config-service</module>
 	</modules>
 </project>

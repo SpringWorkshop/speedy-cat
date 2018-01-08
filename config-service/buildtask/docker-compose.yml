@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  config-service-master:
+    container_name: config-service-master
+    build:
+      context: ../../config-service
+      dockerfile: ./buildtask/Dockerfile
+    working_dir: /app
+    external_links:
+      - registry-service-master
+      - registry-service-replicate
+    environment:
+      APP_ENV: dev
+      REGISTRY_CLUSTER: http://registry-service-master:8760/eureka/,http://registry-service-replicate:8760/eureka/
+    expose:
+      - 8781
+    ports:
+      - 8781:8781
+  config-service-replicate:
+    container_name: config-service-replicate
+    build:
+      context: ../../config-service
+      dockerfile: ./buildtask/Dockerfile
+    working_dir: /app
+    external_links:
+      - registry-service-master
+      - registry-service-replicate
+    environment:
+      APP_ENV: dev
+      REGISTRY_CLUSTER: http://registry-service-master:8760/eureka/,http://registry-service-replicate:8760/eureka/
+    expose:
+      - 8781
+    ports:
+      - 8782:8781
