@@ -1,8 +1,0 @@
-eureka:
-  instance:
-    hostname: ${HOSTNAME}
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/,http://${REPLICATE}:${server.port}/eureka/
