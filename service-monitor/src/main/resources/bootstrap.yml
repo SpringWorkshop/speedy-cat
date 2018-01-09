@@ -1,0 +1,11 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${REGISTRY_CLUSTER:http://localhost:8760/eureka/}
+spring:
+  cloud:
+    config:
+      label: ${CONFIG_VERSION:master}
+      discovery:
+        enabled: true
+        service-id: config-service

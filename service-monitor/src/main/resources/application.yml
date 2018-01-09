@@ -5,15 +5,5 @@ spring:
     name: service-monitor
   profiles:
     active: ${APP_ENV:dev}
-  mail:
-    host: ${SMTP_SERVER:smtp.example.com}
-  boot:
-    admin:
-      notify:
-        mail:
-          to: ${PAGER_EMAIL:support@example.com}
-management:
-    security:
-      enabled: false
 info:
-    version: @project.version@
+  version: @project.version@

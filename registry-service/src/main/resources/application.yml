@@ -2,3 +2,11 @@ spring:
   profiles: prod,test,dev
 server:
   port: 8760
+eureka:
+  instance:
+    hostname: ${HOSTNAME}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${HOSTNAME}:${server.port}/eureka/,http://${REPLICATE}:${server.port}/eureka/

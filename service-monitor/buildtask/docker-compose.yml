@@ -12,9 +12,8 @@ services:
       - registry-service-replicate
     environment:
       APP_ENV: dev
-      REGISTRY_CLUSTERS: http://registry-service-master:8760/eureka/,http://registry-service-replicate:8760/eureka/
-      SMTP_SERVER: smtp.163.com
-      PAGER_EMAIL: rivneg@163.com
+      CONFIG_VERSION: master
+      REGISTRY_CLUSTER: http://registry-service-master:8760/eureka/,http://registry-service-replicate:8760/eureka/
     expose:
       - 8771
     ports:
