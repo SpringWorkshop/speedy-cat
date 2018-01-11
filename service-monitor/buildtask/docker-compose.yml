@@ -3,6 +3,7 @@ version: '2'
 services:
   service-monitor:
     container_name: service-monitor
+    mem_limit: 800000000
     build:
       context: ../../service-monitor
       dockerfile: ./buildtask/Dockerfile
@@ -18,3 +19,8 @@ services:
       - 8771
     ports:
       - 8771:8771
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service-monitor

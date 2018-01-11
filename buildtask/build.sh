@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-mvn package
+mvn clean package -Dmaven.test.skip=true

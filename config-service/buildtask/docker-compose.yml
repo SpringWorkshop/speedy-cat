@@ -3,6 +3,7 @@ version: '2'
 services:
   config-service-master:
     container_name: config-service-master
+    mem_limit: 800000000
     build:
       context: ../../config-service
       dockerfile: ./buildtask/Dockerfile
@@ -17,8 +18,14 @@ services:
       - 8781
     ports:
       - 8781:8781
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: config-service
   config-service-replicate:
     container_name: config-service-replicate
+    mem_limit: 800000000
     build:
       context: ../../config-service
       dockerfile: ./buildtask/Dockerfile
@@ -33,3 +40,8 @@ services:
       - 8781
     ports:
       - 8782:8781
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: config-service

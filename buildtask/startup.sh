@@ -22,12 +22,18 @@ start_config_cluster() {
     wait_for_service_ready http://localhost:8781/health config-service
 }
 
+start_log_cluster() {
+    docker-compose -f ./log-service/buildtask/docker-compose.yml up --build -d
+    sleep 60
+}
+
 start_other_services() {
     docker-compose \
      -f ./service-monitor/buildtask/docker-compose.yml \
      up --build -d
 }
 
+start_log_cluster
 start_registry_cluster
 start_config_cluster
 start_other_services
