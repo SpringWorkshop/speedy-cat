@@ -3,6 +3,7 @@ version: '2'
 services:
   registry-service-master:
     container_name: registry-service-master
+    mem_limit: 800000000
     build:
       context: ../../registry-service
       dockerfile: ./buildtask/Dockerfile
@@ -15,9 +16,15 @@ services:
       - 8760
     ports:
       - 8760:8760
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: registry-service
 
   registry-service-replicate:
       container_name: registry-service-replicate
+      mem_limit: 800000000
       build:
         context: ../
         dockerfile: ./buildtask/Dockerfile
@@ -30,3 +37,8 @@ services:
         - 8760
       ports:
         - 8761:8760
+      logging:
+        driver: "fluentd"
+        options:
+          fluentd-address: localhost:24224
+          tag: registry-service

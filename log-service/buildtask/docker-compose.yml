@@ -1,0 +1,30 @@
+version: '2'
+services:
+  fluentd:
+    container_name: fluentd
+    mem_limit: 400000000
+    build: ../../log-service/buildtask/fluentd
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+    links:
+      - "elasticsearch"
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch
+    expose:
+      - 9200
+    ports:
+      - "9200:9200"
+
+  kibana:
+    container_name: kibana
+    image: kibana
+    mem_limit: 400000000
+    links:
+      - "elasticsearch"
+    ports:
+      - "5601:5601"
